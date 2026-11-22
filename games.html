@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="styles.css">
   <script src="games.js?v=2" defer></script>
   <script src="study-week.js" defer></script>
+  <script src="cycle-games.js" defer></script>
   <script src="feedback.js" defer></script>
 </head>
 <body>
@@ -33,7 +34,7 @@
     <section id="games" class="section practice" aria-labelledby="games-title">
       <div class="wrap">
         <h1 id="games-title">Break the Ningas Kugon cycle</h1>
-        <p class="section-description">Play through a school week and see how your choices can repeat or interrupt the Ningas Kugon cycle.</p>
+        <p class="section-description">Play four games to spot the Ningas Kugon cycle, see what keeps it going, and practice ways to break it.</p>
         <div class="games-grid">
           <article class="practice-card" aria-labelledby="story-title">
             <h2 id="story-title">What would you do next?</h2>
@@ -59,6 +60,34 @@
               <button class="button" type="button" id="quiz-next" hidden>Next round</button>
             </div>
             <button class="button" type="button" id="quiz-start" hidden>Start quiz</button>
+          </article>
+          <article class="practice-card" aria-labelledby="clues-title">
+            <h2 id="clues-title">Spot the warning signs</h2>
+            <p>Read a student’s journal and tap the two lines that reveal each stage of the cycle.</p>
+            <div id="clues-play" hidden>
+              <p class="practice-progress" id="clues-round"></p>
+              <h3 class="practice-question" id="clues-question" tabindex="-1"></h3>
+              <div class="practice-options" id="clues-lines" role="group" aria-labelledby="clues-question"></div>
+              <p class="practice-result" id="clues-result" role="status"></p>
+              <button class="button" type="button" id="clues-check">Check the clues</button>
+              <button class="button" type="button" id="clues-next" hidden>Next journal entry</button>
+            </div>
+            <button class="button" type="button" id="clues-start" hidden>Open the journal</button>
+          </article>
+          <article class="practice-card" aria-labelledby="flame-title">
+            <h2 id="flame-title">Keep the flame going</h2>
+            <p>Reach 8 practice points in five sessions while keeping at least 2 energy. Watch how each choice affects your meters.</p>
+            <div id="flame-play" hidden>
+              <p class="practice-progress" id="flame-round"></p>
+              <h3 class="practice-question" id="flame-question" tabindex="-1" aria-describedby="flame-change"></h3>
+              <p class="practice-result" id="flame-change"></p>
+              <div class="flame-meters" aria-labelledby="flame-title">
+                <label>Practice <span id="flame-practice-label"></span><progress id="flame-practice" max="8" value="0"></progress></label>
+                <label>Energy <span id="flame-energy-label"></span><meter id="flame-energy" min="0" max="6" value="5" low="2"></meter></label>
+              </div>
+              <div class="practice-options" id="flame-options" role="group" aria-labelledby="flame-question"></div>
+            </div>
+            <button class="button" type="button" id="flame-start" hidden>Start the five sessions</button>
           </article>
         </div>
         <noscript><p>Enable JavaScript to play the games.</p></noscript>
