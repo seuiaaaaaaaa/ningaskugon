@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore the Ningas Kugon cycle and build steadier study habits with a daily planner for senior high school students.">
+  <title>Ningas Kugon — A Study Guide & Planner</title>
+  <meta name="theme-color" content="#fffaf2">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="wrap nav" aria-label="Main navigation">
+      <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">✦</span> Ningas Kugon</a>
+      <div class="nav-links">
+        <a href="#cycle">The Cycle</a>
+        <a href="#rules">Planning Rules</a>
+        <a class="button button-small" href="#planner">Study Planner</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section id="top" class="wrap hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span aria-hidden="true"></span> A study guide for senior high school</p>
+        <h1 id="hero-title">Ningas <em>Kugon</em></h1>
+        <p class="research-title">Senior High School Students' Lived Experiences of Initiating and Abandoning Academic Goals</p>
+        <dl class="definitions">
+          <div><dt>ningas <i>n.</i></dt><dd>a flame or spark that catches quickly</dd></div>
+          <div><dt>kugon <i>n.</i></dt><dd>cogon grass — burns fast, then dies out just as fast</dd></div>
+        </dl>
+        <p class="intro">Starting a goal with a burst of excitement, then losing interest before it is finished — a new planner on Monday, an empty one by Friday. Learn why it happens, then use the planner to keep going.</p>
+        <div class="hero-actions">
+          <a class="button" href="#cycle">Explore the cycle</a>
+          <a class="button button-outline" href="#planner">Open study planner</a>
+        </div>
+      </div>
+      <figure class="hero-image">
+        <img src="cogon.jpg" alt="Feathery cogon grass backlit by an orange sunset" width="1024" height="1536" fetchpriority="high">
+        <figcaption><span aria-hidden="true">✧</span><span><i>Imperata cylindrica</i><br>Cogon grass</span></figcaption>
+      </figure>
+    </section>
+
+    <section id="cycle" class="cycle section" aria-labelledby="cycle-title">
+      <div class="wrap">
+        <p class="eyebrow"><span aria-hidden="true"></span> 01 · The Cycle</p>
+        <h2 id="cycle-title">Five stages, one fire <em>that keeps restarting</em></h2>
+        <p class="section-description">Tap a stage to see what happens, the signs, a real-life scenario, and what helps.</p>
+        <div class="stages" role="tablist" aria-label="Stages of the cycle">
+          <button type="button" id="stage-0" role="tab" aria-selected="true" aria-controls="stage-detail"><span aria-hidden="true">✦</span>The Spark</button>
+          <button type="button" id="stage-1" role="tab" aria-selected="false" aria-controls="stage-detail" tabindex="-1"><span aria-hidden="true">☀</span>The Blaze</button>
+          <button type="button" id="stage-2" role="tab" aria-selected="false" aria-controls="stage-detail" tabindex="-1"><span aria-hidden="true">◒</span>The Fade</button>
+          <button type="button" id="stage-3" role="tab" aria-selected="false" aria-controls="stage-detail" tabindex="-1"><span aria-hidden="true">◌</span>The Burnout</button>
+          <button type="button" id="stage-4" role="tab" aria-selected="false" aria-controls="stage-detail" tabindex="-1"><span aria-hidden="true">↻</span>The Restart</button>
+        </div>
+        <div class="stage-detail" id="stage-detail" role="tabpanel" aria-labelledby="stage-0" tabindex="0">
+          <div class="stage-overview">
+            <p class="eyebrow" id="stage-number">Stage 01</p>
+            <h3 id="stage-title">The Spark</h3>
+            <p id="stage-summary">A new goal feels exciting, and it’s easy to imagine how much you’ll get done.</p>
+          </div>
+          <dl class="stage-notes">
+            <div><dt>Signs to look for</dt><dd id="stage-signs">You make big promises or spend more time setting up than doing the first task.</dd></div>
+            <div><dt>Example scenario</dt><dd id="stage-example">After getting a low quiz score, Vince buys a new planner and fills it with two-hour review blocks every night.</dd></div>
+            <div><dt>What helps</dt><dd id="stage-help">Pick one action you can finish today, like reviewing five questions from the quiz.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section id="planner" class="wrap section planner" aria-labelledby="planner-title">
+      <p class="eyebrow"><span aria-hidden="true"></span> 02 · Study Planner</p>
+      <h2 id="planner-title">Plan it small, <em>keep it going</em></h2>
+      <p class="section-description">Put deadlines, quizzes, and study sessions on the calendar. Split a big task into small steps before its due date.</p>
+      <div class="reminder-alerts" aria-label="Task reminders" role="log" id="reminder-alerts"></div>
+      <div class="planner-grid">
+        <div class="calendar" id="planner-calendar">
+          <div class="calendar-header">
+            <h3 id="calendar-month" aria-live="polite">Calendar</h3>
+            <div class="calendar-controls">
+              <button type="button" id="prev-month" aria-label="Previous month">‹</button>
+              <button type="button" id="today">Today</button>
+              <button type="button" id="next-month" aria-label="Next month">›</button>
+            </div>
+          </div>
+          <div class="weekdays" aria-hidden="true"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+          <div class="calendar-days" id="calendar-days" aria-label="Calendar dates"></div>
+        </div>
+        <div class="daily" id="daily-list">
+          <a class="calendar-link" href="#planner-calendar">Back to calendar</a>
+          <p class="eyebrow" id="selected-date"></p>
+          <h3>Daily to-do list</h3>
+          <p id="task-progress" class="task-progress" aria-live="polite"></p>
+          <ul class="tasks" id="tasks"></ul>
+          <form id="task-form">
+            <label for="task-name">Task</label>
+            <input id="task-name" name="task" placeholder="e.g. Review five quiz questions" required maxlength="120">
+            <label for="task-reminder">Reminder time <span>(optional)</span></label>
+            <input type="time" id="task-reminder" name="reminder">
+            <div class="form-actions">
+              <select id="task-type" name="type" aria-label="Task type">
+                <option>Study session</option><option>Deadline</option><option>Quiz</option><option>Other</option>
+              </select>
+              <button class="button button-small" type="submit">Add task</button>
+            </div>
+          </form>
+          <p id="storage-note" class="storage-note" role="status">Plans are saved only in this browser.</p>
+        </div>
+      </div>
+      <noscript><p>Enable JavaScript to use the study planner and explore all five stages.</p></noscript>
+    </section>
+
+    <section id="rules" class="rules section" aria-labelledby="rules-title">
+      <div class="wrap">
+        <p class="eyebrow"><span aria-hidden="true"></span> Planning Rules</p>
+        <h2 id="rules-title">Planning rules that <em>keep the flame steady</em></h2>
+        <div class="rules-grid">
+          <article><span aria-hidden="true">◎</span><h3>Make goals small and clear</h3><p>Instead of “study harder,” try “answer 10 practice problems every Monday, Wednesday, and Friday.”</p></article>
+          <article><span aria-hidden="true">✧</span><h3>Remember your “why”</h3><p>Write the reason behind your goal and keep it where you can see it — your notebook cover or phone wallpaper.</p></article>
+          <article><span aria-hidden="true">≋</span><h3>Plan for the strong winds</h3><p>Expect busy weeks. Decide in advance what a “minimum day” looks like, like 10 minutes of review.</p></article>
+          <article><span aria-hidden="true">♧</span><h3>Find study buddies</h3><p>Share your goal with a friend or group. Checking in with each other makes it easier to continue.</p></article>
+          <article><span aria-hidden="true">✓</span><h3>Progress over perfection</h3><p>Missing one day is normal. What matters is coming back the next day instead of giving up the whole goal.</p></article>
+          <article><span aria-hidden="true">↻</span><h3>Reflect and adjust</h3><p>Every week, ask yourself what worked and what got in the way. Use your answers to adjust the plan and keep working toward your goal.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">✦</span> Ningas Kugon</a>
+    <a href="#top">Back to top</a>
+  </footer>
+</body>
+</html>
