@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Play four short Ningas Kugon quiz rounds and practice choosing realistic study habits.">
+  <meta name="description" content="Play four Ningas Kugon mini-games about attention, memory, and realistic study habits.">
   <meta name="theme-color" content="#fffaf2">
   <title>Ningas Kugon | Study Games</title>
   <link rel="canonical" href="https://seuiaaaaaaaa.github.io/ningaskugon/games.html">
@@ -11,6 +11,7 @@
   <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="stylesheet" href="styles.css">
   <script src="games.js" defer></script>
+  <script src="activities.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -31,8 +32,8 @@
     <section id="games" class="section practice" aria-labelledby="games-title">
       <div class="wrap">
         <h1 id="games-title">Break the Ningas Kugon cycle</h1>
-        <p class="section-description">Work through four study scenarios and get feedback after each choice.</p>
-        <div class="quiz-layout">
+        <p class="section-description">Take the scenario quiz, flip memory cards, catch sparks, or solve a study-time puzzle.</p>
+        <div class="games-grid">
           <article class="practice-card" aria-labelledby="quiz-title">
             <h2 id="quiz-title">Choose your next move</h2>
             <p>Pick the best answer for each round. You can replay the quiz to try for a higher score.</p>
@@ -46,14 +47,48 @@
             </div>
             <button class="button" type="button" id="quiz-start" hidden>Start quiz</button>
           </article>
+          <article class="practice-card" aria-labelledby="memory-title">
+            <h2 id="memory-title">Study desk memory</h2>
+            <p>Flip two cards at a time to find four pairs. Try to finish in as few turns as you can.</p>
+            <div id="memory-play" hidden>
+              <p class="practice-progress" id="memory-score"></p>
+              <div class="tile-grid memory-grid" id="memory-board" role="group" aria-label="Memory cards"></div>
+              <p class="practice-result" id="memory-result" role="status"></p>
+            </div>
+            <button class="button" type="button" id="memory-start" hidden>Start memory game</button>
+          </article>
+          <article class="practice-card" aria-labelledby="spark-title">
+            <h2 id="spark-title">Catch the sparks</h2>
+            <p>Tap the star as it moves around the grid. Each empty tile you tap counts as a miss.</p>
+            <div id="spark-play" hidden>
+              <p class="practice-progress" id="spark-score"></p>
+              <div class="tile-grid spark-grid" id="spark-board" role="group" aria-label="Spark tiles. With a tile focused, use keys 1 through 9 to choose a tile."></div>
+              <p class="practice-result" id="spark-result" role="status"></p>
+            </div>
+            <div class="game-actions" id="spark-actions" hidden>
+              <button class="button" type="button" id="spark-start">Play 20 seconds</button>
+              <button class="button button-outline" type="button" id="spark-practice">Practice without timer</button>
+            </div>
+          </article>
+          <article class="practice-card" aria-labelledby="budget-title">
+            <h2 id="budget-title">Beat the study clock</h2>
+            <p>Use up all your minutes by picking one review, one practice task, and one break.</p>
+            <div id="budget-play" hidden>
+              <p class="practice-progress" id="budget-score" role="status"></p>
+              <div class="practice-options budget-options" id="budget-options" role="group" aria-label="Study activities"></div>
+              <p class="practice-result" id="budget-result" role="status"></p>
+              <button class="button" type="button" id="budget-check">Check my picks</button>
+            </div>
+            <button class="button" type="button" id="budget-start" hidden>Start time puzzle</button>
+          </article>
         </div>
-        <noscript><p>Enable JavaScript to play the quiz.</p></noscript>
+        <noscript><p>Enable JavaScript to play the games.</p></noscript>
       </div>
     </section>
 
     <section id="feedback" class="wrap section feedback" aria-labelledby="feedback-title">
       <h2 id="feedback-title">Leave a comment or suggestion</h2>
-      <p class="section-description">Which part helped you? What could make the quiz or study planner better?</p>
+      <p class="section-description">Which part helped you? What could make the games or study planner better?</p>
       <form id="feedback-form" class="practice-card feedback-form" name="study-guide-feedback" method="POST" data-netlify="true" netlify-honeypot="extra-field" hidden>
         <p hidden><label>Leave this field empty <input name="extra-field"></label></p>
         <label for="feedback-type">Type of feedback</label>
@@ -73,7 +108,7 @@
 
   <footer class="wrap footer">
     <a class="brand" href="index.html#top"><span class="brand-mark" aria-hidden="true">✦</span> Ningas Kugon</a>
-    <div class="footer-links"><a href="#games">Back to quiz</a></div>
+    <div class="footer-links"><a href="#games">Back to games</a></div>
   </footer>
 </body>
 </html>
