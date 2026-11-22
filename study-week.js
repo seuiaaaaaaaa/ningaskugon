@@ -7,7 +7,7 @@ function setupStudyWeek() {
     monday: {
       stage: "Monday · The Spark",
       heading: "The quiz is on Friday",
-      text: "You’re motivated after getting a low score on your last quiz. What study plan will you start with?",
+      text: "You’re motivated after getting a low score on your last quiz. Your first study session is tonight.",
       choices: [
         { label: "Review five questions after dinner each school night.", next: "smallStart" },
         { label: "Review two chapters every night until the quiz.", next: "bigStart" }
@@ -17,21 +17,21 @@ function setupStudyWeek() {
       stage: "Wednesday · The Fade",
       heading: "Your group project runs late",
       consequence: "You finished five questions on Monday and Tuesday. The short reviews fit those evenings.",
-      text: "Tonight you only have ten minutes before bed. You’re tired and tempted to skip the session. What do you do next?",
+      text: "Tonight you only have ten minutes before bed. You’re tired and tempted to skip the session.",
       choices: busyDayChoices
     },
     bigStart: {
       stage: "Wednesday · The Fade",
       heading: "Your group project runs late",
       consequence: "You got through two chapters on Monday, then stayed up late trying to do it again on Tuesday. The plan is getting harder to repeat.",
-      text: "Tonight you only have ten minutes before bed. There’s no time for two chapters. What do you do next?",
+      text: "Tonight you only have ten minutes before bed. There’s no time for two chapters.",
       choices: busyDayChoices
     },
     keptGoing: {
       stage: "Thursday · Keep the habit going",
       heading: "You found two topics to review",
       consequence: "The ten-minute session kept you going and showed you what you still needed to practice.",
-      text: "A classmate is also reviewing tonight. How will you spend your last study session?",
+      text: "A classmate is also reviewing tonight. This is your last study session before the quiz.",
       choices: [
         { label: "Ask my classmate to quiz me on those two topics.", next: "steadyFinish" },
         { label: "Try to cover every topic again before bed.", next: "cramFinish" }
@@ -41,7 +41,7 @@ function setupStudyWeek() {
       stage: "Thursday · A chance to restart",
       heading: "Yesterday’s work is still waiting",
       consequence: "Moving the whole session made Thursday feel heavier. It’s tempting to give up on the plan entirely.",
-      text: "You have another ten minutes after dinner. What will you do with them?",
+      text: "You have another ten minutes after dinner. Tomorrow is quiz day.",
       choices: [
         { label: "Start again with the three questions I find hardest.", next: "smallRestart" },
         { label: "Wait until after the quiz and start a stricter plan next week.", next: "repeatCycle" }
@@ -80,9 +80,18 @@ function setupStudyWeek() {
   const consequence = document.querySelector("#story-consequence");
   const text = document.querySelector("#story-text");
   const choices = document.querySelector("#story-choices");
+  const decision = document.querySelector("#story-decision");
+  const art = document.querySelector("#story-art");
+  const days = Array.from(document.querySelectorAll(".story-week [data-day]"));
 
-  function showScene(id) {
+  function showScene(id, moveFocus = true) {
     const scene = scenes[id];
+    const [day] = scene.stage.split(" · ");
+    art.dataset.day = day;
+    for (const item of days) {
+      if (item.dataset.day === day) item.setAttribute("aria-current", "step");
+      else item.removeAttribute("aria-current");
+    }
     stage.textContent = scene.stage;
     heading.textContent = scene.heading;
     consequence.textContent = scene.consequence || "";
@@ -94,17 +103,14 @@ function setupStudyWeek() {
       button.addEventListener("click", () => showScene(next));
       return button;
     }));
-    choices.hidden = !scene.choices;
+    decision.hidden = !scene.choices;
     start.hidden = Boolean(scene.choices);
-    start.textContent = "Replay the story";
-    heading.focus();
+    if (moveFocus) heading.focus();
   }
 
-  start.addEventListener("click", () => {
-    play.hidden = false;
-    showScene("monday");
-  });
-  start.hidden = false;
+  start.addEventListener("click", () => showScene("monday"));
+  play.hidden = false;
+  showScene("monday", false);
 }
 
 setupStudyWeek();
