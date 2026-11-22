@@ -27,31 +27,42 @@ function setupScenarioQuiz() {
   ];
   const start = document.querySelector("#quiz-start");
   const play = document.querySelector("#quiz-play");
-  const progress = document.querySelector("#quiz-round");
+  const roundLabel = document.querySelector("#quiz-round");
+  const progress = document.querySelector("#quiz-progress");
   const question = document.querySelector("#quiz-question");
   const options = document.querySelector("#quiz-options");
   const result = document.querySelector("#quiz-result");
   const next = document.querySelector("#quiz-next");
   let roundIndex = 0;
   let score = 0;
+  let attempt = 0;
+  progress.max = rounds.length;
 
   function showRound() {
     const round = rounds[roundIndex];
-    progress.textContent = `Round ${roundIndex + 1} of ${rounds.length} · Score ${score}`;
+    roundLabel.textContent = `Round ${roundIndex + 1} of ${rounds.length} · Score ${score}`;
     question.textContent = round.question;
     result.textContent = "";
     next.hidden = true;
-    options.replaceChildren(...round.options.map((option, index) => {
+    let answerButton;
+    options.replaceChildren(...round.options.map((_, position) => {
+      const index = (position + attempt - 1) % round.options.length;
       const button = document.createElement("button");
       button.type = "button";
-      button.textContent = option;
-      button.setAttribute("aria-pressed", "false");
+      button.textContent = round.options[index];
+      if (index === round.answer) answerButton = button;
       button.addEventListener("click", () => {
-        const correct = index === round.answer;
+        const correct = button === answerButton;
         if (correct) score += 1;
-        progress.textContent = `Round ${roundIndex + 1} of ${rounds.length} · Score ${score}`;
-        button.setAttribute("aria-pressed", "true");
+        progress.value = roundIndex + 1;
+        roundLabel.textContent = `Round ${roundIndex + 1} of ${rounds.length} · Score ${score}`;
         for (const choice of options.children) choice.disabled = true;
+        answerButton.classList.add("quiz-answer-correct");
+        answerButton.append(" ✓ Correct answer");
+        if (!correct) {
+          button.classList.add("quiz-answer-missed");
+          button.append(" — Your choice");
+        }
         result.textContent = correct
           ? `Correct! ${round.explanation}`
           : `Best answer: ${round.options[round.answer]}. ${round.explanation}`;
@@ -66,8 +77,10 @@ function setupScenarioQuiz() {
   }
 
   start.addEventListener("click", () => {
+    attempt += 1;
     roundIndex = 0;
     score = 0;
+    progress.value = 0;
     start.hidden = true;
     play.hidden = false;
     showRound();
@@ -78,7 +91,7 @@ function setupScenarioQuiz() {
       showRound();
       return;
     }
-    progress.textContent = "Quiz complete";
+    roundLabel.textContent = "Quiz complete";
     question.textContent = `You got ${score} out of ${rounds.length}.`;
     options.replaceChildren();
     result.textContent = "";
@@ -88,97 +101,6 @@ function setupScenarioQuiz() {
     question.focus();
   });
   start.hidden = false;
-}
-
-function setupStageOrderGame() {
-  const start = document.querySelector("#order-start");
-  const play = document.querySelector("#order-play");
-  const picks = document.querySelector("#order-picks");
-  const options = document.querySelector("#order-options");
-  const result = document.querySelector("#order-result");
-
-  start.addEventListener("click", () => {
-    picks.replaceChildren();
-    result.textContent = "Choose the first stage.";
-    const shuffledStages = [2, 4, 1, 0, 3];
-    options.replaceChildren(...shuffledStages.map((index) => {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.textContent = stages[index].title;
-      button.addEventListener("click", () => {
-        const nextIndex = picks.children.length;
-        if (index !== nextIndex) {
-          result.textContent = `Try again. Hint: ${stages[nextIndex].summary}`;
-          return;
-        }
-        const pick = document.createElement("li");
-        pick.textContent = stages[index].title;
-        picks.append(pick);
-        button.disabled = true;
-        const nextButton = options.querySelector("button:enabled");
-        if (nextButton) {
-          result.textContent = `${stages[index].title} is correct. Choose the next stage.`;
-          nextButton.focus({ preventScroll: true });
-          return;
-        }
-        result.textContent = "All five stages are in order! What small step could help you keep going during the Fade?";
-        start.textContent = "Play challenge again";
-        start.hidden = false;
-        start.focus({ preventScroll: true });
-      });
-      return button;
-    }));
-    start.hidden = true;
-    play.hidden = false;
-    options.firstElementChild.focus();
-  });
-  start.hidden = false;
-}
-
-function setupPlanGame() {
-  const form = document.querySelector("#plan-game");
-  const result = document.querySelector("#plan-game-result");
-  form.addEventListener("change", () => { result.textContent = ""; });
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const cue = data.get("cue");
-    const activity = data.get("activity");
-    const duration = data.get("duration");
-    const tips = [];
-    if (cue === "vague") tips.push("Pick a cue you can notice, like finishing dinner.");
-    if (activity === "vague") tips.push("Pick one task you can clearly tell you’ve finished.");
-    if (duration === "long") tips.push("Try 10 or 15 minutes so the plan fits a busy night.");
-    result.textContent = tips.length
-      ? tips.join(" ")
-      : `Ready to try: ${cue}, I’ll ${activity} for ${duration}.`;
-  });
-  form.hidden = false;
-}
-
-function setupMatchingGame() {
-  const form = document.querySelector("#match-game");
-  const result = document.querySelector("#match-game-result");
-  const strategies = {
-    distraction: "Silence notifications before opening your notes",
-    alone: "Ask a study buddy to check in on Friday",
-    busy: "Review one topic for ten minutes"
-  };
-  const fields = Array.from(form.querySelectorAll("select"));
-  for (const field of fields) {
-    for (const [obstacle, strategy] of Object.entries(strategies)) {
-      field.add(new Option(strategy, obstacle));
-    }
-  }
-  form.addEventListener("change", () => { result.textContent = ""; });
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const missed = fields.map((field, index) => field.value === field.name ? null : index + 1).filter(Boolean);
-    result.textContent = missed.length
-      ? `${fields.length - missed.length} of ${fields.length} correct. Try a different strategy for ${missed.length === 1 ? "row" : "rows"} ${missed.join(", ")}.`
-      : "All three match! A short review fits a busy day, fewer notifications protect your focus, and a study buddy helps you check in.";
-  });
-  form.hidden = false;
 }
 
 function setupFeedbackForm() {
@@ -252,7 +174,4 @@ function setupFeedbackForm() {
 }
 
 setupScenarioQuiz();
-setupStageOrderGame();
-setupPlanGame();
-setupMatchingGame();
 setupFeedbackForm();
