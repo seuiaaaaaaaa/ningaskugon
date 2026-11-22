@@ -9,9 +9,9 @@
   <link rel="canonical" href="https://seuiaaaaaaaa.github.io/ningaskugon/games.html">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css">
   <script src="games.js?v=2" defer></script>
-  <script src="study-week.js?v=2" defer></script>
+  <script src="study-week.js" defer></script>
   <script src="cycle-games.js" defer></script>
   <script src="feedback.js" defer></script>
 </head>
@@ -36,31 +36,19 @@
         <h1 id="games-title">Break the Ningas Kugon cycle</h1>
         <p class="section-description">Play four games to spot the Ningas Kugon cycle, see what keeps it going, and practice ways to break it.</p>
         <div class="games-grid">
-          <article class="practice-card story-card" aria-labelledby="story-title">
-            <div class="game-art story-art" id="story-art" aria-hidden="true"></div>
-            <div class="story-panel">
-              <h2 id="story-title">What would you do next?</h2>
-              <div id="story-play" hidden>
-                <ol class="story-week" aria-label="Story timeline">
-                  <li data-day="Monday">Mon</li>
-                  <li data-day="Wednesday">Wed</li>
-                  <li data-day="Thursday">Thu</li>
-                  <li data-day="Friday">Fri</li>
-                </ol>
-                <p class="practice-progress" id="story-stage"></p>
-                <h3 class="practice-question" id="story-heading" tabindex="-1" aria-describedby="story-consequence story-text"></h3>
-                <p class="practice-result" id="story-consequence"></p>
-                <p class="story-text" id="story-text"></p>
-                <div id="story-decision">
-                  <p class="story-prompt" id="story-prompt">Ano ang gagawin mo next?</p>
-                  <div class="practice-options" id="story-choices" role="group" aria-labelledby="story-prompt"></div>
-                </div>
-              </div>
-              <button class="button" type="button" id="story-start" hidden>Replay the story</button>
+          <article class="practice-card" aria-labelledby="story-title">
+            <h2 id="story-title">What would you do next?</h2>
+            <p>You’re preparing for a Friday quiz. Play through the week and see where your choices take you.</p>
+            <div id="story-play" hidden>
+              <p class="practice-progress" id="story-stage"></p>
+              <h3 class="practice-question" id="story-heading" tabindex="-1" aria-describedby="story-consequence story-text"></h3>
+              <p class="practice-result" id="story-consequence"></p>
+              <p class="story-text" id="story-text"></p>
+              <div class="practice-options" id="story-choices" role="group" aria-labelledby="story-heading"></div>
             </div>
+            <button class="button" type="button" id="story-start" hidden>Start the story</button>
           </article>
           <article class="practice-card" aria-labelledby="quiz-title">
-            <div class="game-art quiz-art" aria-hidden="true"></div>
             <h2 id="quiz-title">Choose your next move</h2>
             <p>Pick the best answer for each round. You can replay the quiz to try for a higher score.</p>
             <div id="quiz-play" hidden>
@@ -74,7 +62,6 @@
             <button class="button" type="button" id="quiz-start" hidden>Start quiz</button>
           </article>
           <article class="practice-card" aria-labelledby="clues-title">
-            <div class="game-art journal-art" aria-hidden="true"></div>
             <h2 id="clues-title">Spot the warning signs</h2>
             <p>Read a student’s journal and tap the two lines that reveal each stage of the cycle.</p>
             <div id="clues-play" hidden>
@@ -88,7 +75,6 @@
             <button class="button" type="button" id="clues-start" hidden>Open the journal</button>
           </article>
           <article class="practice-card" aria-labelledby="flame-title">
-            <div class="game-art flame-art" aria-hidden="true"></div>
             <h2 id="flame-title">Keep the flame going</h2>
             <p>Reach 8 practice points in five sessions while keeping at least 2 energy. Watch how each choice affects your meters.</p>
             <div id="flame-play" hidden>

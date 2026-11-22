@@ -133,24 +133,7 @@ input[type="time"]::-webkit-date-and-time-value { text-align: start; }
 .practice { background: #234438; color: #fffaf2; }
 .practice h1 { max-width: 17ch; margin-top: 0; font-size: clamp(2.45rem, 6vw, 4.5rem); letter-spacing: -.045em; }
 .practice .section-description { color: #e2e9df; }
-.games-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; align-items: start; margin-top: 1.75rem; }
-.game-art { aspect-ratio: 3 / 2; margin-bottom: 1rem; border-radius: .7rem; background: #57412b url("study-game-illustrations.webp") var(--art-x, 0%) var(--art-y, 0%) / 200% 200% no-repeat; }
-.quiz-art { --art-x: 100%; }
-.journal-art { --art-y: 100%; }
-.flame-art { --art-x: 100%; --art-y: 100%; }
-.story-card { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: start; gap: clamp(1rem, 3vw, 2rem); }
-.story-art { margin: 0; }
-.story-art[data-day="Wednesday"] { filter: saturate(.78) brightness(.84); }
-.story-art[data-day="Thursday"] { filter: saturate(.87) brightness(.92); }
-.story-week { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .35rem; margin: .7rem 0 0; padding: 0; list-style: none; }
-.story-week li { padding: .25rem .2rem; border-radius: .35rem; background: #ede6d9; color: #5f5043; font-size: .85rem; text-align: center; }
-.story-week [aria-current="step"] { background: #234438; color: #fffaf2; font-weight: 700; }
-.story-prompt { margin: .65rem 0 .35rem; font-weight: 750; }
-@media (max-width: 880px) { .games-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 650px) {
-  .games-grid, .story-card { grid-template-columns: minmax(0, 1fr); }
-  .story-art { max-height: 240px; width: min(100%, 360px); justify-self: start; }
-}
+.games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 27rem), 1fr)); gap: 1.25rem; align-items: start; margin-top: 1.75rem; }
 .practice-card { min-width: 0; padding: clamp(1rem, 4vw, 2rem); background: var(--white); color: var(--ink); border: 1px solid var(--line); border-radius: 1rem; }
 .practice-card h2 { color: #234438; font-size: clamp(1.65rem, 4vw, 2.25rem); }
 .practice-card h2 + p { margin-top: .6rem; color: var(--muted); }
